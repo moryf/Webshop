@@ -1,0 +1,98 @@
+body {
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  .menu {
+    text-align: center;
+    margin: 10px;
+    border: 1px solid #688E26;
+    padding: 10px;
+  }
+
+  .menu a{
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+  }
+
+  .menu a:hover{
+
+    background-color: antiquewhite;
+
+  }
+  
+  .logo {
+    align-content: center;
+    margin: 0 auto;
+    width: 30px;
+    text-align: center;
+  }
+
+  .logo img{
+    width: 50px;
+    height: auto;
+  }
+  
+  .main {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .telo{
+    justify-items: center;
+}
+
+
+.tekst1{
+    background-color: #688E26;
+    background-size: cover;
+    background-position: bottom;
+    text-align: left;
+    padding: 5vh;
+    padding-left: 10vh;
+
+}
+
+.tekst1>h1{
+    color: #FEFCAD;
+    font-size: 4vh;
+    text-transform: uppercase;
+    padding-bottom: 20px;
+    font-weight: bold;
+}
+
+.tekst1>h2{
+    color: #FEFCAD;
+    padding-top: 20px;
+    font-size: 2vh;
+    text-transform: uppercase;
+}
+
+.tekst2{
+    text-transform: uppercase;
+    width: fit-content;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    padding-bottom: 5vh;
+    background-color: #FEFCAD;
+    font-size: 3vh;
+    font-weight: lighter;
+}
+  
+  .footer {
+    background-color: antiquewhite;
+    clear: both;
+    margin: 0;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  a {
+    color: #688E26;
+    text-decoration: none;
+  }
+  
+  
