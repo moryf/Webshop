@@ -1,3 +1,21 @@
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+   $("#filterForm").submit(function(event){
+      event.preventDefault();
+      var formData = $(this).serialize();
+      $.ajax({
+        type: "POST",
+        url: "../util/filter_products.php",
+        data: formData,
+        success: function(data) {
+           $('.product-grid').html(data);
+        }
+      });
+   });
+});
+</script>
+
 <?php
 session_start();
 
@@ -9,6 +27,7 @@ if (isset($_SESSION['user_id'])) {
 
 require("../util/baza_conn.php");
 require("../modeli/proizvod.php");
+require("../modeli/prodavnica.php");
 $query = "SELECT * FROM proizvodi";
 $result = mysqli_query($conn, $query);
 
@@ -20,6 +39,15 @@ while ($row = mysqli_fetch_assoc($result)) {
   $product = new Proizvod($row['id'], $row['prodavnica'], $row['ime'], $row['cena'], $row['opis']);
   array_push($products, $product);
 }
+
+$prodavnice = array();
+$result=mysqli_query($conn,Prodavnica::ucitajSve());
+
+while ($row = mysqli_fetch_assoc($result)) {
+  $prodavnica = new Prodavnica($row['id'],$row['ime'],$row['adresa'],$row['telefon']);
+  array_push($prodavnice, $prodavnica);
+}
+
 if (isset($_POST['submit'])) {
   $product_id = $_POST['product_id'];
 
@@ -62,6 +90,24 @@ mysqli_close($conn);
 
 <div class="products">
   <h2>Proizvodi</h2>
+  <div>
+    <p>Flitriraj po prodavnici</p>
+    <?php
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $selected = $_POST['filter_prod'];
+} else {
+    echo "<form id='filterForm' method='post'>";
+    echo "<select name='filter_prod'>";
+    foreach ($prodavnice as $prodavnica) {
+        echo "<option value='$prodavnica->id'>$prodavnica->ime</option>";
+    }
+    echo "</select>";
+    echo "<input type='submit' class='btn' value='Filtriraj'/>";
+    echo "</form>";
+}
+?>
+  </div>
   <div class="product-grid">
     <?php
     foreach ($products as $product) {
@@ -78,6 +124,7 @@ mysqli_close($conn);
     }
     ?>
   </div>
+
 </div>
 
 <div class="footer">
