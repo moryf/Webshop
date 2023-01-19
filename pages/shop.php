@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if (isset($_SESSION['user_id'])) {
 } else {
     header('Location: login.php');
@@ -19,7 +20,20 @@ while ($row = mysqli_fetch_assoc($result)) {
   $product = new Proizvod($row['id'], $row['prodavnica'], $row['ime'], $row['cena'], $row['opis']);
   array_push($products, $product);
 }
+if (isset($_POST['submit'])) {
+  $product_id = $_POST['product_id'];
 
+  $query = "SELECT * FROM proizvodi WHERE id = $product_id";
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_assoc($result);
+
+  $product = new Proizvod($row['id'], $row['prodavnica'], $row['ime'], $row['cena'], $row['opis']);
+
+  $_SESSION['order'] = $product->id;
+
+    header('Location: order.php');
+    exit;
+  }
 mysqli_close($conn);
 ?>
 
@@ -42,6 +56,7 @@ mysqli_close($conn);
     <a href="shop.php">Prodavnica</a> |
     <a href="#">O nama</a> |
     <a href="#">Kontakt</a>
+    <a href ="my_orders.php">Moje porudzbine</a>
   </div>
 
 
@@ -55,7 +70,10 @@ mysqli_close($conn);
       echo '  <h3>' . $product->ime . '</h3>';
       echo '  <p>' . $product->opis . '</p>';
       echo '  <p>' . $product->cena . '</p>';
-      echo ' <input name="' . $product->id . '-prod-button" id="' . $product->id . '-prod-button" class="btn" type="button" value="Button"> ';
+      echo '  <form method="post">';
+      echo '    <input type="hidden" name="product_id" value="' . $product->id . '">';
+      echo '    <input type="submit" class="btn" name="submit" value="Add to Order">';
+      echo '  </form>';
       echo '</div>';
     }
     ?>

@@ -34,6 +34,16 @@ if (isset($_POST['submit'])) {
     <title>Document</title>
 </head>
 <body>
+<div class="menu">
+  <div class="logo">
+    <img src="../content/logo.png" alt="Food Web Shop logo">
+  </div>
+    <a href="homepage.php">Home</a> |
+    <a href="shop.php">Prodavnica</a> |
+    <a href="#">O nama</a> |
+    <a href="#">Kontakt</a>
+    <a href ="my_orders.php">Moje porudzbine</a>
+  </div>
     <h1>Potvrdite Porudžbinu</h1>
     <div class="product-grid">
     <?php

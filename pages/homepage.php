@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id'])) {
     <title>Shop</title>
 </head>
 <body>
-  <div class="menu">
+<div class="menu">
   <div class="logo">
     <img src="../content/logo.png" alt="Food Web Shop logo">
   </div>
@@ -27,6 +27,7 @@ if (isset($_SESSION['user_id'])) {
     <a href="shop.php">Prodavnica</a> |
     <a href="#">O nama</a> |
     <a href="#">Kontakt</a>
+    <a href ="my_orders.php">Moje porudzbine</a>
   </div>
 
   <div class="main">
