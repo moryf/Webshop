@@ -16,6 +16,23 @@ $(document).ready(function(){
 });
 </script>
 
+<script>
+$(document).ready(function(){
+   $("#sortForm").submit(function(event){
+      event.preventDefault();
+      var formData = $(this).serialize();
+      $.ajax({
+        type: "POST",
+        url: "../util/sort_products.php",
+        data: formData,
+        success: function(data) {
+           $('.product-grid').html(data);
+        }
+      });
+   });
+});
+</script>
+
 <?php
 session_start();
 
@@ -107,6 +124,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "</form>";
 }
 ?>
+<form id="sortForm" method="post">
+  <select name="sort_by">
+    <option value="asc">Rastuce</option>
+    <option value="desc">Opadajuce</option>
+  </select>
+  <input type="submit" name="submit" value="Sortiraj">
+</form>
+
   </div>
   <div class="product-grid">
     <?php
