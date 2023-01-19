@@ -33,6 +33,25 @@ $(document).ready(function(){
 });
 </script>
 
+<script>
+  $(document).ready(function() {
+  $("#searchTerm").on("keyup", function() {
+    var searchTerm = $(this).val();
+    if (searchTerm.length > 2) {
+      $.ajax({
+        type: "POST",
+        url: "../util/search.php",
+        data: { searchTerm: searchTerm },
+        success: function(data) {
+          $('.product-grid').html(data);
+        }
+      });
+    }
+  });
+});
+
+</script>
+
 <?php
 session_start();
 
@@ -131,6 +150,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   </select>
   <input type="submit" name="submit" value="Sortiraj">
 </form>
+<form id="searchForm">
+  <input type="text" id="searchTerm" placeholder="Search...">
+</form>
+<div id="searchResults"></div>
 
   </div>
   <div class="product-grid">
